@@ -1,0 +1,80 @@
+// Small shared UI building blocks.
+import { MessageCircle, CheckCircle2, Brain, Wallet } from 'lucide-react'
+
+const KIND = {
+  say: { Icon: MessageCircle, label: 'พูดกับลูกค้า', cls: 'bg-blue-50 border-blue-200 text-blue-900' },
+  do: { Icon: CheckCircle2, label: 'ลงมือทำ', cls: 'bg-slate-50 border-slate-200 text-slate-800' },
+  insight: { Icon: Brain, label: 'ระบบวิเคราะห์', cls: 'bg-violet-50 border-violet-200 text-violet-900' },
+  upsell: { Icon: Wallet, label: 'โอกาสขาย', cls: 'bg-emerald-50 border-emerald-200 text-emerald-900' },
+}
+
+export function Suggestion({ s }) {
+  const k = KIND[s.kind] || KIND.do
+  const Icon = k.Icon
+  return (
+    <div className={`anim-slideIn rounded-xl border px-3.5 py-3 ${k.cls}`}>
+      <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide opacity-70">
+        <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+        <span>{k.label}</span>
+      </div>
+      <div className="text-[14px] leading-relaxed">{s.text}</div>
+    </div>
+  )
+}
+
+export function RoleBar({ device, role, sub, accent = '#ec2127', right }) {
+  return (
+    <div
+      className="sticky top-0 z-20 flex items-center gap-3 border-b border-line bg-white/90 px-4 py-3 backdrop-blur"
+      style={{ boxShadow: '0 1px 0 rgba(0,0,0,0.02)' }}
+    >
+      <div
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg text-white"
+        style={{ background: accent }}
+      >
+        {device}
+      </div>
+      <div className="min-w-0 flex-1">
+        <div className="truncate text-[13px] font-semibold leading-tight text-ink">{role}</div>
+        {sub && <div className="truncate text-[11px] text-ink-soft">{sub}</div>}
+      </div>
+      {right}
+    </div>
+  )
+}
+
+export function Tag({ children, color }) {
+  return (
+    <span
+      className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold"
+      style={{ background: `${color}14`, color }}
+    >
+      {children}
+    </span>
+  )
+}
+
+export function SectionLabel({ children }) {
+  return (
+    <div className="mb-2 text-[11px] font-bold uppercase tracking-wider text-ink-mute">
+      {children}
+    </div>
+  )
+}
+
+export function Brand({ small, sub = 'Experience' }) {
+  return (
+    <div className="flex items-center gap-2">
+      <div
+        className={`flex items-center justify-center rounded-lg bg-true font-bold text-white ${
+          small ? 'h-7 w-7 text-sm' : 'h-9 w-9 text-lg'
+        }`}
+      >
+        T
+      </div>
+      <div className={`font-bold tracking-tight text-ink ${small ? 'text-sm' : 'text-base'}`}>
+        True <span className="font-medium text-ink-soft">{sub}</span>
+      </div>
+    </div>
+  )
+}

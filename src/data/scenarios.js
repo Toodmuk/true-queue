@@ -168,3 +168,82 @@ export function queueEstimate(seedId) {
   const waitMin = position * 4 + (h % 4) + 2 // ~6-18 min, plausible
   return { waitMin, position }
 }
+
+// ── Service Staff console (the laptop view at the counter) ─────────────────
+// What the agent surfaces to staff the moment the customer reaches the desk:
+// who they are, how they actually use the network, and the best next offer.
+// Package names/prices mirror True's real 5G line-up so the demo reads true.
+export const STAFF_CUSTOMER = {
+  name: 'Nut Wilaiporn',
+  phone: '089-xxx-1188',
+  tier: 'Gold',
+  tenure: '2 yr 2 mo',
+  plan: 'True 5G 399',
+  planDetail: '30GB data · 200 mins',
+  arpu: 425,
+  status: 'Good standing · never late',
+  reason: 'Change / renew plan',
+  // usage this billing cycle
+  usage: {
+    data: { used: 41.2, cap: 30 }, // GB — over cap
+    calls: { used: 312, included: 200 }, // minutes — over included
+    sms: 24,
+    roaming: 0,
+    trend: [28, 33, 31, 36, 38, 41], // last 6 months data (GB)
+    peak: 'Evenings 19:00–23:00, on mobile data (no home broadband on file)',
+    topApps: ['YouTube', 'Netflix', 'TikTok', 'LINE'],
+  },
+  insights: [
+    {
+      icon: 'trendingup',
+      text: 'Over the 30GB cap 5 of the last 6 months — buying top-ups averaging ~฿120/mo.',
+    },
+    {
+      icon: 'video',
+      text: 'Heavy evening video streaming on mobile data — no home internet on the account.',
+    },
+    {
+      icon: 'phone',
+      text: 'Call minutes climbing: 312 used vs 200 included last cycle.',
+    },
+  ],
+  // recommended next offers — ordered by fit
+  recommend: [
+    {
+      tag: 'Best fit',
+      tone: 'true',
+      name: 'True 5G Max 699',
+      price: '฿699/mo',
+      delta: '+฿274 ARPU',
+      data: 'Unlimited full-speed data',
+      extra: 'Unlimited calls all networks',
+      why: 'Ends the data overage she already pays for and comfortably covers her ~41GB — net win for her, +ARPU for us.',
+    },
+    {
+      tag: 'Add-on',
+      tone: 'violet',
+      name: 'Entertainment+ bundle',
+      price: '+฿119/mo',
+      delta: '+฿119 ARPU',
+      data: 'Netflix Mobile + Viu Premium + WeTV',
+      why: 'Matches her evening streaming behaviour — high-attach, low-friction add-on.',
+    },
+    {
+      tag: 'Household',
+      tone: 'emerald',
+      name: 'True 5G Together 999 + Home WiFi',
+      price: '฿999/mo',
+      delta: 'bundle',
+      data: '2 lines · shared unlimited · 1Gbps fiber',
+      extra: 'TrueVisions entertainment included',
+      why: 'She streams on mobile with no home internet — bundling fiber lifts ARPU and locks in the whole household.',
+    },
+  ],
+  retention: {
+    level: 'Low churn risk',
+    tone: 'emerald',
+    note: 'Loyal 2-year customer with a clean payment history — this is an upsell moment, not a save.',
+  },
+  nextBest:
+    'Lead with True 5G Max 699 — frame it as “stop paying for top-ups.” Attach Entertainment+ if she’s interested. Raise the home-fiber bundle only if she mentions watching at home.',
+}

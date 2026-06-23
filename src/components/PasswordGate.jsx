@@ -40,12 +40,12 @@ export default function PasswordGate({ children }) {
         <div className="flex justify-center">
           <Brand sub="Queue" />
         </div>
-        <h1 className="mt-5 text-center text-[18px] font-bold text-ink">เข้าสู่ต้นแบบ True Queue</h1>
+        <h1 className="mt-5 text-center text-[18px] font-bold text-ink">Sign in to True Queue</h1>
         <p className="mt-1 text-center text-[13px] leading-relaxed text-ink-soft">
-          กรอกรหัสผ่านเพื่อเข้าชม
+          Enter your password to continue
         </p>
 
-        <label htmlFor="tsf-pw" className="sr-only">รหัสผ่าน</label>
+        <label htmlFor="tsf-pw" className="sr-only">Password</label>
         <div
           className={`mt-5 flex items-center gap-2 rounded-xl border bg-cloud px-3 py-2.5 transition focus-within:ring-2 focus-within:ring-true/40 ${
             err ? 'border-true' : 'border-line'
@@ -64,22 +64,18 @@ export default function PasswordGate({ children }) {
               setVal(e.target.value)
               setErr(false)
             }}
-            placeholder="รหัสผ่าน"
+            placeholder="Password"
             className="w-full bg-transparent text-base text-ink outline-none"
           />
         </div>
-        {err && <p id="tsf-pw-err" role="alert" className="mt-2 text-[12px] font-medium text-true">รหัสผ่านไม่ถูกต้อง ลองอีกครั้ง</p>}
+        {err && <p id="tsf-pw-err" role="alert" className="mt-2 text-[12px] font-medium text-true">Incorrect password. Please try again.</p>}
 
         <button
           type="submit"
           className="mt-4 w-full rounded-xl bg-true py-3 text-[15px] font-bold text-white shadow-sm transition active:scale-[0.98]"
         >
-          เข้าชม
+          Continue
         </button>
-
-        <p className="mt-4 text-center text-[11px] leading-relaxed text-ink-mute">
-          ต้นแบบแนวคิด · True Next Gen
-        </p>
       </form>
     </div>
   )

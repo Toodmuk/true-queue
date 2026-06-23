@@ -1,26 +1,4 @@
 // Small shared UI building blocks.
-import { MessageCircle, CheckCircle2, Brain, Wallet } from 'lucide-react'
-
-const KIND = {
-  say: { Icon: MessageCircle, label: 'พูดกับลูกค้า', cls: 'bg-blue-50 border-blue-200 text-blue-900' },
-  do: { Icon: CheckCircle2, label: 'ลงมือทำ', cls: 'bg-slate-50 border-slate-200 text-slate-800' },
-  insight: { Icon: Brain, label: 'ระบบวิเคราะห์', cls: 'bg-violet-50 border-violet-200 text-violet-900' },
-  upsell: { Icon: Wallet, label: 'โอกาสขาย', cls: 'bg-emerald-50 border-emerald-200 text-emerald-900' },
-}
-
-export function Suggestion({ s }) {
-  const k = KIND[s.kind] || KIND.do
-  const Icon = k.Icon
-  return (
-    <div className={`anim-slideIn rounded-xl border px-3.5 py-3 ${k.cls}`}>
-      <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide opacity-70">
-        <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-        <span>{k.label}</span>
-      </div>
-      <div className="text-[14px] leading-relaxed">{s.text}</div>
-    </div>
-  )
-}
 
 export function RoleBar({ device, role, sub, accent = '#ec2127', right }) {
   return (

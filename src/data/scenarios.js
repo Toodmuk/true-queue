@@ -153,12 +153,23 @@ function hashSeed(s) {
   return h >>> 0
 }
 
-// queue numbers — a fresh "new-format" code (e.g. B8823) per the field note that
-// True is moving to a new queue-number scheme.
+// Queue numbers follow the real True Shop ticket scheme (from field notes):
+// the FIRST DIGIT encodes the service type, prefixed with "T-".
+//   0 = payment / bill (00·01) · 3 = SIM work · 4 = after-sales True (4501) ·
+//   6 = cancel / retention · 7 = sales / device
+// e.g. cancelling internet (retention) → "T-6xxxx".
+const SERVICE_CODE = {
+  bill: '0',
+  'new-sim': '3',
+  package: '4', // change / renew plan (after-sales True, Q45/4501)
+  signal: '4', // signal / internet issue (after-sales True)
+  retention: '6', // cancel / switch carrier
+  device: '7', // buy / finance device (sales)
+}
 export function makeQueueNumber(seedId) {
-  const letter = { 'package': 'B', 'device': 'C', 'new-sim': 'S', 'bill': 'P', 'retention': 'R', 'signal': 'T' }[seedId] || 'A'
-  const n = 1000 + (hashSeed(seedId) % 9000)
-  return `${letter}${n}`
+  const code = SERVICE_CODE[seedId] || '4'
+  const n = 1000 + (hashSeed(seedId) % 9000) // stable 4-digit running number
+  return `T-${code}${n}`
 }
 
 // Stable, plausible wait estimate for the True Queue ticket (no randomness).
